@@ -28,7 +28,12 @@
       const articles = groupPapers.map(paper => {
       const yearHeading = lastYear !== paper.year ? `<h4 class="year-heading">${paper.year}</h4>` : '';
       lastYear = paper.year;
-      const authors = paper.authors.split(', ').map(author => !paper.ambiguousAuthors && ['Yu Wang', 'Y Wang'].includes(author) ? `<strong>${escape(author)}</strong>` : escape(author)).join(', ');
+      const authors = paper.authors.split(', ').map((author, index) => {
+        const isSelf = Number.isInteger(paper.selfAuthorIndex)
+          ? index === paper.selfAuthorIndex
+          : !paper.ambiguousAuthors && ['Yu Wang', 'Y Wang'].includes(author);
+        return isSelf ? `<strong>${escape(author)}</strong>` : escape(author);
+      }).join(', ');
       const titleURL = paper.paper || scholarURL(paper);
       return `${yearHeading}<article class="paper ${paper.status}" id="paper-${paper.id}">
         <div class="paper-venue"><span class="venue-badge">${escape(paper.venue)}</span><span class="paper-year">${paper.year}</span></div>
@@ -66,6 +71,18 @@
     });
   }
   let ticking = false;
+  const stats = window.SCHOLAR_STATS;
+  if (stats && Number.isSafeInteger(stats.citations) && stats.citations >= 0 &&
+      Number.isSafeInteger(stats.hIndex) && stats.hIndex >= 0 && stats.hIndex <= stats.citations &&
+      Number.isFinite(Date.parse(stats.updatedAt))) {
+    document.getElementById('citation-count').textContent = stats.citations.toLocaleString('en-US');
+    document.getElementById('h-index').textContent = stats.hIndex;
+    const date = new Date(stats.updatedAt).toLocaleDateString('en-US', {
+      year: 'numeric', month: 'short', day: 'numeric', timeZone: 'Asia/Shanghai'
+    });
+    document.getElementById('metrics-note').textContent = `Google Scholar · Updated ${date}`;
+  }
+  document.getElementById('works-count').textContent = papers.length;
   window.addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(() => { updateNav(); ticking = false; }); ticking = true; } }, {passive:true});
   renderPapers();
   updateNav();

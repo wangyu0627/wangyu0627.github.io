@@ -1,0 +1,61 @@
+name: Update Scholar statistics and deploy Pages
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '23 1 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test Scholar parser and failure handling
+        run: node --test tests/scholar-stats.test.mjs
+      - name: Refresh Google Scholar statistics
+        id: scholar
+        continue-on-error: true
+        run: node scripts/update-scholar-stats.mjs
+      - name: Keep the successful snapshot in the repository
+        if: steps.scholar.outcome == 'success'
+        run: |
+          if ! git diff --quiet -- scholar-stats.js; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add scholar-stats.js
+            git commit -m 'Update Google Scholar statistics'
+            git push
+          fi
+      - name: Report retained snapshot
+        if: steps.scholar.outcome == 'failure'
+        run: echo '::warning::Google Scholar could not be refreshed. Publishing the last successful statistics and their original update date.'
+      - uses: actions/configure-pages@v5
+      - name: Prepare website files
+        run: |
+          mkdir _site
+          cp index.html styles.css app.js publications.js scholar-stats.js .nojekyll _site/
+          cp -r assets _site/
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - name: Deploy website
+        id: deployment
+        uses: actions/deploy-pages@v4

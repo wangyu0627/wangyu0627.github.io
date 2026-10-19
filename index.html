@@ -12,6 +12,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
   <script src="publications.js" defer></script>
+  <script src="scholar-stats.js" defer></script>
   <script src="app.js" defer></script>
 </head>
 <body>
@@ -45,18 +46,18 @@
           <a href="https://orcid.org/0009-0008-6272-8714" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#icon-id"/></svg>ORCID<span class="arrow">↗</span></a>
         </div>
         <div class="metrics" aria-label="Google Scholar statistics">
-          <div><strong>268</strong><span>Citations</span></div>
-          <div><strong>8</strong><span>h-index</span></div>
-          <div><strong>15</strong><span>Works</span></div>
+          <div><strong id="citation-count">268</strong><span>Citations</span></div>
+          <div><strong id="h-index">8</strong><span>h-index</span></div>
+          <div><strong id="works-count">15</strong><span>Works</span></div>
         </div>
-        <p class="metrics-note">Google Scholar · Oct. 17, 2026</p>
+        <p id="metrics-note" class="metrics-note">Google Scholar · Oct. 17, 2026</p>
       </div>
     </aside>
     <main id="main">
       <section id="about" class="about-section">
         <p class="eyebrow">PERSONAL ACADEMIC HOMEPAGE</p>
         <h2>About Me</h2>
-        <p class="intro-text">I am a Ph.D. student in Computer Science and Technology at <a href="https://www.hfut.edu.cn/" target="_blank" rel="noopener noreferrer">Hefei University of Technology</a>, advised by <a href="https://le-wu.com/" target="_blank" rel="noopener noreferrer">Prof. Le Wu</a>. Previously, I received my master's degree from Anhui University in 2025, advised by <a href="https://bigdata.ahu.edu.cn/" target="_blank" rel="noopener noreferrer">Prof. Yiwen Zhang</a> and <a href="https://leisangcs.github.io/" target="_blank" rel="noopener noreferrer">Assoc. Prof. Lei Sang</a>, and my bachelor's degree from Fuyang Normal University in 2022.</p>
+        <p class="intro-text">I am a Ph.D. student in Computer Science and Technology at <a href="https://www.hfut.edu.cn/" target="_blank" rel="noopener noreferrer">Hefei University of Technology</a>, advised by <a href="https://le-wu.com/" target="_blank" rel="noopener noreferrer">Prof. Le Wu</a>. Previously, I received my master's degree from Anhui University in 2025, advised by <a href="https://bigdata.ahu.edu.cn/" target="_blank" rel="noopener noreferrer">Prof. Yiwen Zhang</a> and <a href="https://leisangcs.github.io/" target="_blank" rel="noopener noreferrer">Assoc. Prof. Lei Sang</a>.</p>
         
         <p>My research focuses on <strong>recommender systems</strong> and <strong>large language models</strong>. I study user behavior, intent, and multimodal preferences to build generative recommenders with stronger generalization and reasoning capabilities.</p>
         
@@ -76,7 +77,6 @@
           <li><time>2026</time><p>Our team ranked <strong>22 / 1,873</strong> in the academic track of the TAAC–KDD Cup Tencent Uni-Rec Challenge.</p></li>
           <li><time>2026</time><p><a href="https://arxiv.org/abs/2511.18740" target="_blank" rel="noopener noreferrer">HaNoRec</a> accepted at <strong>SIGIR 2026</strong>; co-authored work <a href="https://arxiv.org/abs/2512.00679" target="_blank" rel="noopener noreferrer">ProEx</a> at <strong>KDD 2026</strong>, and VC-Soup at <strong>WWW 2026</strong>.</p></li>
           <li><time>2026.03</time><p>Released <a href="https://arxiv.org/abs/2603.06243" target="_blank" rel="noopener noreferrer">MLLMRec-R1</a>, a preprint on reasoning for multimodal sequential recommendation.</p></li>
-          <li><time>2025.09</time><p>Started my Ph.D. at Hefei University of Technology, advised by Prof. Le Wu.</p></li>
         </ul>
       </section>
       <section id="publications">
@@ -101,7 +101,6 @@
         <div class="education-list">
           <article><div class="education-time">2025.09 — Present</div><div><h3>Hefei University of Technology</h3><p>Ph.D. student · Computer Science and Technology</p><p class="muted">Advisor: <a href="https://le-wu.com/" target="_blank" rel="noopener noreferrer">Prof. Le Wu</a></p></div></article>
           <article><div class="education-time">2022.09 — 2025.07</div><div><h3>Anhui University</h3><p>Master’s degree · Computer Science and Technology</p><p class="muted">Advisors: <a href="https://bigdata.ahu.edu.cn/" target="_blank" rel="noopener noreferrer">Prof. Yiwen Zhang</a> &amp; <a href="https://leisangcs.github.io/" target="_blank" rel="noopener noreferrer">Assoc. Prof. Lei Sang</a></p></div></article>
-          <article><div class="education-time">2018.09 — 2022.07</div><div><h3>Fuyang Normal University</h3><p>Bachelor’s degree · Electronic Information Science and Technology</p></div></article>
         </div>
       </section>
       <section id="honors">
@@ -110,8 +109,6 @@
           <li><time>2026</time><span>22nd / 1,873 · TAAC–KDD Cup Tencent Uni-Rec Challenge, academic track</span></li>
           <li><time>2025</time><span>Outstanding Master’s Thesis · Anhui Computer Federation</span></li>
           <li><time>2025</time><span>Outstanding Graduate of Anhui Province · Top 2%</span></li>
-          <li><time>2025</time><span>First-Class Scholarship for Doctoral Students</span></li>
-          <li><time>2024</time><span>First-Class Scholarship for Master’s Students</span></li>
           <li><time>2023</time><span>Outstanding Master’s Thesis Cultivation Program</span></li>
         </ul>
       </section>
