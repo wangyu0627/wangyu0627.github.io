@@ -1,5 +1,21 @@
 // Update publication metadata here. Preserve published / preprint distinctions.
 // Sources: the owner's CV, Google Scholar, and the linked paper / code pages.
+// Venue classifications use CCF 2026 (7th edition) and CAS 2025 major categories.
+// Prefer CCF A/B; other journals fall back to a verified CAS zone.
+// AI Open has no verified CAS 2025 classification here; arXiv is not a journal.
+// Sources and update instructions are recorded in README.md.
+window.VENUE_RANKINGS = {
+  SIGIR: {ccf: "A", ccfYear: 2026},
+  KDD: {ccf: "A", ccfYear: 2026},
+  WWW: {ccf: "A", ccfYear: 2026},
+  TKDE: {ccf: "A", ccfYear: 2026},
+  TOIS: {ccf: "A", ccfYear: 2026},
+  TBD: {ccf: "C", ccfYear: 2026, casZone: 2, casYear: 2025},
+  TST: {casZone: 2, casYear: 2025},
+  TCE: {casZone: 2, casYear: 2025},
+  ASC: {casZone: 2, casYear: 2025}
+};
+
 window.PUBLICATIONS = [
   {id:"hanorec",year:2026,venue:"SIGIR",status:"published",first:true,title:"Multimodal Large Language Models with Adaptive Preference Optimization for Sequential Recommendation",authors:"Yu Wang, Yonghui Yang, Le Wu, Yi Zhang, Fei Liu, Richang Hong",publication:"The 49th International ACM SIGIR Conference on Research and Development in Information Retrieval",paper:"https://arxiv.org/abs/2511.18740",code:"https://github.com/wangyu0627/HaNoRec",scholar:"mB3voiENLucC"},
   {id:"mllmrec",year:2026,venue:"arXiv",status:"preprint",first:true,title:"MLLMRec-R1: Incentivizing Reasoning Capability in Large Language Models for Multimodal Sequential Recommendation",authors:"Yu Wang, Yonghui Yang, Le Wu, Jiancan Wu, Hefei Xu, Hui Lin",publication:"arXiv:2603.06243 · Preprint",paper:"https://arxiv.org/abs/2603.06243",code:"https://github.com/wangyu0627/MLLMRec-R1",scholar:"mVmsd5A6BfQC"},

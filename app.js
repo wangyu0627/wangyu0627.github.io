@@ -9,6 +9,18 @@
     ? 'https://scholar.google.com.hk/citations?view_op=view_citation&user=3ZhIpB0AAAAJ&citation_for_view=3ZhIpB0AAAAJ:' + encodeURIComponent(paper.scholar)
     : 'https://scholar.google.com/scholar?q=' + encodeURIComponent('"' + paper.title + '"');
   const link = (url, label) => `<a href="${escape(url)}" target="_blank" rel="noopener noreferrer">${label}</a>`;
+  const rankingBadge = paper => {
+    if (paper.status !== 'published') return '';
+    const ranking = (window.VENUE_RANKINGS || {})[paper.venue];
+    if (!ranking) return '';
+    if (['A', 'B'].includes(ranking.ccf)) {
+      return `<span class="ranking-badge ranking-ccf" title="CCF ${escape(ranking.ccfYear)} · Class ${ranking.ccf}">CCF-${ranking.ccf}</span>`;
+    }
+    if (Number.isInteger(ranking.casZone) && ranking.casZone >= 1 && ranking.casZone <= 4) {
+      return `<span class="ranking-badge ranking-cas" lang="zh-CN" title="中科院期刊分区 ${escape(ranking.casYear)} 年升级版 · 大类：计算机科学">中科院${ranking.casZone}区</span>`;
+    }
+    return '';
+  };
   const isAdvisorFirstSecond = paper => paper.advisorFirst && paper.second;
   const isLead = paper => paper.first || isAdvisorFirstSecond(paper);
   const groups = [
@@ -38,7 +50,7 @@
       return `${yearHeading}<article class="paper ${paper.status}" id="paper-${paper.id}">
         <div class="paper-venue"><span class="venue-badge">${escape(paper.venue)}</span><span class="paper-year">${paper.year}</span></div>
         <div><h5 class="paper-title">${link(titleURL, escape(paper.title))}</h5><p class="authors">${authors}</p>
-          <p class="publication-venue">${escape(paper.publication)} · ${paper.year}</p>
+          <p class="publication-venue">${escape(paper.publication)} · ${paper.year}${rankingBadge(paper)}</p>
           <div class="paper-links">${paper.paper ? link(paper.paper, 'Paper ↗') : ''}
             ${paper.code ? link(paper.code, 'Code ↗') : ''}
             ${link(scholarURL(paper), 'Scholar ↗')}

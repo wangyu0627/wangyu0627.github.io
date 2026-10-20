@@ -27,6 +27,25 @@ See the [GitHub Pages quickstart](https://docs.github.com/en/pages/quickstart).
 - Portrait and favicon: `assets/`.
 - Cached Google Scholar citations and h-index: `scholar-stats.js` (updated automatically).
 
+## Publication ranking badges
+
+Edit `window.VENUE_RANKINGS` at the top of `publications.js` to maintain classifications. Published papers prefer `CCF-A` or `CCF-B`; other journals display a verified CAS major-category zone. Preprints and journals without verified data receive no badge. The edition is shown in the badge tooltip and above the publication list.
+
+The current classification snapshot was checked on October 20, 2026:
+
+| Venues | Display | Edition |
+| --- | --- | --- |
+| SIGIR, KDD, WWW (conference), TKDE, TOIS | CCF-A | CCF 2026, 7th edition |
+| TBD, TST, TCE, ASC | 中科院2区 | CAS 2025 upgraded edition, Computer Science major category |
+| AI Open | No badge: CAS 2025 classification not verified | — |
+| arXiv | No badge: preprint | — |
+
+CCF source: [2026 directory announcement at UCAS](https://ai.ucas.ac.cn/index.php/zh-cn/jxjy/fzpy1/7675-ccf-2026), with the [CCF directory PDF mirror](https://scdm-shu.github.io/ccf/2026-CCF-Ranking.pdf), pages 32, 35, 69 and 70 (one-based). TBD is CCF-C and therefore uses the CAS fallback; no current entry is CCF-B.
+
+CAS classifications are corroborated by institutional publication records: [TBD, Zhengzhou University](https://www5.zzu.edu.cn/cilab/yjfxjkycg/qklw.htm), [TST, Hangzhou Dianzi University](https://faculty.hdu.edu.cn/jsjxy/wyx2/main.htm), [TCE, China Agricultural University](https://faculty.cau.edu.cn/qzb/), and [ASC, Nanjing Tech University](https://cce.njtech.edu.cn/tmxyh/info/1011/2346.htm). These public records are supporting references, not an authenticated export from the CAS database.
+
+Do not substitute JCR quartiles or the separate 2026 新锐期刊分区表 for CAS zones. Rankings are a manually verified, edition-specific snapshot; the Google Scholar updater does not modify them.
+
 ## Google Scholar statistics
 
 The workflow requests the public profile `3ZhIpB0AAAAJ` daily at 09:23 China time (01:23 UTC), reads the all-time citations and h-index, saves the successful snapshot, and deploys the site. Scheduled runs may be delayed by GitHub. The page shows the last successful update date. `Works` counts entries in `publications.js`, not Google Scholar records.
