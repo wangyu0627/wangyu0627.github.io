@@ -14,7 +14,7 @@ Create a public repository named `wangyu0627.github.io` under the `wangyu0627` a
 
 Upload all website files, including the hidden `.github/` folder, `scripts/`, `tests/`, and `scholar-stats.js`.
 
-In **Settings → Pages → Build and deployment → Source**, choose **GitHub Actions**. The included workflow publishes on pushes to `main`, on a daily schedule, and when run manually from **Actions → Update Scholar statistics and deploy Pages → Run workflow**.
+In **Settings → Pages → Build and deployment → Source**, choose **GitHub Actions**. The included workflow publishes on pushes to `main`, every Monday, and when run manually from **Actions → Update Scholar statistics and deploy Pages → Run workflow**.
 
 See the [GitHub Pages quickstart](https://docs.github.com/en/pages/quickstart).
 
@@ -48,9 +48,9 @@ Do not substitute JCR quartiles or the separate 2026 新锐期刊分区表 for C
 
 ## Google Scholar statistics
 
-The workflow requests the public profile `3ZhIpB0AAAAJ` daily at 09:23 China time (01:23 UTC), reads the all-time citations and h-index, saves the successful snapshot, and deploys the site. Scheduled runs may be delayed by GitHub. The page shows the last successful update date. `Works` counts entries in `publications.js`, not Google Scholar records.
+The workflow requests the public profile `3ZhIpB0AAAAJ` every Monday at 09:23 China time (01:23 UTC), reads the all-time citations and h-index, saves the successful snapshot, and deploys the site. Scheduled runs may be delayed by GitHub. The page shows the last successful update date. `Works` counts entries in `publications.js`, not Google Scholar records.
 
-If Scholar returns a CAPTCHA, rate limit, network error, or unexpected HTML, the workflow keeps and publishes the previous snapshot without changing its date. No API key is required. Google Scholar may restrict automated requests, so daily freshness is not guaranteed.
+If Scholar returns a CAPTCHA, rate limit, network error, or unexpected HTML, the workflow keeps and publishes the previous snapshot without changing its date. No API key is required. Google Scholar may restrict automated requests, so a successful refresh every week is not guaranteed.
 
 The workflow needs permission to write the snapshot to the repository. If your repository policy blocks it, allow **Read and write permissions** under **Settings → Actions → General → Workflow permissions**. Branch protection rules may also block the bot's commit. GitHub can disable scheduled workflows in inactive public repositories after 60 days; re-enable the workflow in Actions if this happens.
 
