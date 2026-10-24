@@ -2,5 +2,5 @@
 window.SCHOLAR_STATS = {
   "citations": 274,
   "hIndex": 8,
-  "updatedAt": "2026-10-23T08:23:32.103Z"
+  "updatedAt": "2026-10-24T07:23:43.046Z"
 };
